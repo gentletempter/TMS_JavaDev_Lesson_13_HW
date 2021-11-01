@@ -9,10 +9,16 @@ import java.util.Scanner;
 public class LambdaSample {
     public static void lambdaDemo() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the number 1: to get Factorial; 2: to get reverse string");
+        System.out.println("Enter the number 1: to get reverse string; 2: to get factorial");
         int choice = scanner.nextInt();
         scanner.nextLine();
         if (choice == 1) {
+            Operationable<String> operation;
+            System.out.println("Enter the string");
+            String str = scanner.nextLine();
+            operation = (arg) -> new StringBuilder(str).reverse().toString();
+            System.out.println(operation.process(str));
+        } else if (choice == 2) {
             Operationable<BigInteger> operation;
             System.out.println("Enter the number: ");
             int num = scanner.nextInt();
@@ -24,12 +30,6 @@ public class LambdaSample {
                 return factorial;
             };
             System.out.println(operation.process(BigInteger.valueOf(num)));
-        } else if (choice == 2) {
-            Operationable<String> operation;
-            System.out.println("Enter the string");
-            String str = scanner.nextLine();
-            operation = (arg) -> new StringBuilder(str).reverse().toString();
-            System.out.println(operation.process(str));
         }
         scanner.close();
     }
